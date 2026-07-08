@@ -1,6 +1,9 @@
 import { createRootRoute, createRoute, createRouter, Outlet } from '@tanstack/react-router';
 import { RootLayout } from '@/app/layouts/RootLayout';
 import { PlaceholderPage } from '@/shared/components/PlaceholderPage';
+import { CustomersPage } from '@/features/customers/components/CustomersPage';
+import { TransportTypesPage } from '@/features/transport-types/components/TransportTypesPage';
+import { ItemsPage } from '@/features/items/components/ItemsPage';
 
 const rootRoute = createRootRoute({
   component: RootLayout,
@@ -48,21 +51,19 @@ const monitoringRoute = createRoute({
 const customersRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: 'customers',
-  component: () => <PlaceholderPage title="Customers" description="Manage customers." />,
+  component: CustomersPage,
 });
 
 const transportTypesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: 'transport-types',
-  component: () => (
-    <PlaceholderPage title="Transport Types" description="Manage transport modalities." />
-  ),
+  component: TransportTypesPage,
 });
 
 const itemsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: 'items',
-  component: () => <PlaceholderPage title="Items" description="Manage catalog items." />,
+  component: ItemsPage,
 });
 
 const auditRoute = createRoute({

@@ -7,7 +7,10 @@ export const salesOrderSchema = z.object({
     .array(
       z.object({
         itemId: z.string().min(1, 'Select an item'),
-        quantity: z.coerce.number().int().positive('Quantity must be greater than zero'),
+        quantity: z
+          .number({ message: 'Quantity is required' })
+          .int('Quantity must be a whole number')
+          .positive('Quantity must be greater than zero'),
       }),
     )
     .min(1, 'Add at least one item'),

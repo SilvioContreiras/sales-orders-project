@@ -7,7 +7,9 @@ export const itemSchema = z.object({
   name: z.string().trim().min(2, 'Name must have at least 2 characters'),
   description: z.string().trim().optional(),
   unitOfMeasure: z.enum(UNIT_OF_MEASURE_VALUES),
-  unitPrice: z.coerce.number().positive('Unit price must be greater than zero'),
+  unitPrice: z
+    .number({ message: 'Unit price is required' })
+    .positive('Unit price must be greater than zero'),
 });
 
 export type ItemFormValues = z.infer<typeof itemSchema>;
