@@ -1,17 +1,18 @@
-import { createRootRoute, createRoute, createRouter, Outlet } from '@tanstack/react-router';
+import {
+  createRootRoute,
+  createRoute,
+  createRouter,
+  lazyRouteComponent,
+  Outlet,
+} from '@tanstack/react-router';
 import { RootLayout } from '@/app/layouts/RootLayout';
 import { PlaceholderPage } from '@/shared/components/PlaceholderPage';
-import { CustomersPage } from '@/features/customers/components/CustomersPage';
-import { TransportTypesPage } from '@/features/transport-types/components/TransportTypesPage';
-import { ItemsPage } from '@/features/items/components/ItemsPage';
-import { SalesOrdersPage } from '@/features/sales-orders/components/SalesOrdersPage';
-import { CreateSalesOrderPage } from '@/features/sales-orders/components/CreateSalesOrderPage';
-import { SalesOrderDetailPage } from '@/features/sales-orders/components/SalesOrderDetailPage';
-import { SchedulingPage } from '@/features/scheduling/components/SchedulingPage';
-import { MonitoringPage } from '@/features/monitoring/components/MonitoringPage';
-import { DashboardPage } from '@/features/dashboard/components/DashboardPage';
-import { AuditPage } from '@/features/audit/components/AuditPage';
+import { LoadingState } from '@/shared/components/ui';
 
+/**
+ * Feature pages are lazily loaded so each route ships in its own chunk, keeping
+ * the initial bundle small. The shell (layout) stays eager.
+ */
 const rootRoute = createRootRoute({
   component: RootLayout,
   notFoundComponent: () => (
@@ -22,7 +23,10 @@ const rootRoute = createRootRoute({
 const dashboardRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
-  component: DashboardPage,
+  component: lazyRouteComponent(
+    () => import('@/features/dashboard/components/DashboardPage'),
+    'DashboardPage',
+  ),
 });
 
 const salesOrdersRoute = createRoute({
@@ -34,55 +38,76 @@ const salesOrdersRoute = createRoute({
 const salesOrdersIndexRoute = createRoute({
   getParentRoute: () => salesOrdersRoute,
   path: '/',
-  component: SalesOrdersPage,
+  component: lazyRouteComponent(
+    () => import('@/features/sales-orders/components/SalesOrdersPage'),
+    'SalesOrdersPage',
+  ),
 });
 
 const salesOrderNewRoute = createRoute({
   getParentRoute: () => salesOrdersRoute,
   path: 'new',
-  component: CreateSalesOrderPage,
+  component: lazyRouteComponent(
+    () => import('@/features/sales-orders/components/CreateSalesOrderPage'),
+    'CreateSalesOrderPage',
+  ),
 });
 
 const salesOrderDetailRoute = createRoute({
   getParentRoute: () => salesOrdersRoute,
   path: '$orderId',
-  component: SalesOrderDetailPage,
+  component: lazyRouteComponent(
+    () => import('@/features/sales-orders/components/SalesOrderDetailPage'),
+    'SalesOrderDetailPage',
+  ),
 });
 
 const schedulingRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: 'scheduling',
-  component: SchedulingPage,
+  component: lazyRouteComponent(
+    () => import('@/features/scheduling/components/SchedulingPage'),
+    'SchedulingPage',
+  ),
 });
 
 const monitoringRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: 'monitoring',
-  component: MonitoringPage,
+  component: lazyRouteComponent(
+    () => import('@/features/monitoring/components/MonitoringPage'),
+    'MonitoringPage',
+  ),
 });
 
 const customersRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: 'customers',
-  component: CustomersPage,
+  component: lazyRouteComponent(
+    () => import('@/features/customers/components/CustomersPage'),
+    'CustomersPage',
+  ),
 });
 
 const transportTypesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: 'transport-types',
-  component: TransportTypesPage,
+  component: lazyRouteComponent(
+    () => import('@/features/transport-types/components/TransportTypesPage'),
+    'TransportTypesPage',
+  ),
 });
 
 const itemsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: 'items',
-  component: ItemsPage,
+  component: lazyRouteComponent(() => import('@/features/items/components/ItemsPage'), 'ItemsPage'),
 });
 
 const auditRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: 'audit',
-  component: AuditPage,
+  component: lazyRouteComponent(() => import('@/features/audit/components/AuditPage'), 'AuditPage'),
 });
 
 const routeTree = rootRoute.addChildren([
@@ -99,6 +124,7 @@ const routeTree = rootRoute.addChildren([
 export const router = createRouter({
   routeTree,
   defaultPreload: 'intent',
+  defaultPendingComponent: () => <LoadingState />,
 });
 
 declare module '@tanstack/react-router' {
