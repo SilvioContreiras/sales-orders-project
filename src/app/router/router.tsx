@@ -10,6 +10,7 @@ import { SalesOrderDetailPage } from '@/features/sales-orders/components/SalesOr
 import { SchedulingPage } from '@/features/scheduling/components/SchedulingPage';
 import { MonitoringPage } from '@/features/monitoring/components/MonitoringPage';
 import { DashboardPage } from '@/features/dashboard/components/DashboardPage';
+import { AuditPage } from '@/features/audit/components/AuditPage';
 
 const rootRoute = createRootRoute({
   component: RootLayout,
@@ -81,9 +82,7 @@ const itemsRoute = createRoute({
 const auditRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: 'audit',
-  component: () => (
-    <PlaceholderPage title="Audit Trail" description="Traceability of relevant events." />
-  ),
+  component: AuditPage,
 });
 
 const routeTree = rootRoute.addChildren([
