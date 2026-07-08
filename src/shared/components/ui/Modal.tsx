@@ -2,6 +2,8 @@ import { useEffect, type ReactNode } from 'react';
 import { X } from 'lucide-react';
 import { Button } from './Button';
 
+type ModalSize = 'md' | 'lg';
+
 interface ModalProps {
   open: boolean;
   title: string;
@@ -9,9 +11,23 @@ interface ModalProps {
   onClose: () => void;
   children: ReactNode;
   footer?: ReactNode;
+  size?: ModalSize;
 }
 
-export function Modal({ open, title, description, onClose, children, footer }: ModalProps) {
+const sizeClasses: Record<ModalSize, string> = {
+  md: 'max-w-lg',
+  lg: 'max-w-xl',
+};
+
+export function Modal({
+  open,
+  title,
+  description,
+  onClose,
+  children,
+  footer,
+  size = 'md',
+}: ModalProps) {
   useEffect(() => {
     if (!open) return;
     const onKeyDown = (event: KeyboardEvent) => {
@@ -30,7 +46,7 @@ export function Modal({ open, title, description, onClose, children, footer }: M
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="relative z-10 flex max-h-[90vh] w-full max-w-lg flex-col rounded-xl bg-white shadow-xl"
+        className={`relative z-10 flex max-h-[90vh] w-full flex-col rounded-xl bg-white shadow-xl ${sizeClasses[size]}`}
       >
         <div className="flex items-start justify-between border-b border-slate-200 px-5 py-4">
           <div>
@@ -43,7 +59,9 @@ export function Modal({ open, title, description, onClose, children, footer }: M
         </div>
         <div className="flex-1 overflow-y-auto px-5 py-4">{children}</div>
         {footer ? (
-          <div className="flex justify-end gap-2 border-t border-slate-200 px-5 py-4">{footer}</div>
+          <div className="flex flex-wrap justify-end gap-2 border-t border-slate-200 px-5 py-4">
+            {footer}
+          </div>
         ) : null}
       </div>
     </div>

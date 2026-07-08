@@ -113,9 +113,11 @@ export function useUpdateSchedule() {
       id: string;
       payload: SchedulePayload;
       previousSchedule: Schedule | null;
+      silent?: boolean;
     }) => updateSchedule(vars.id, vars.payload),
     onSuccess: (order, vars) => {
       invalidate(order);
+      if (vars.silent) return;
       dispatch(
         notify({ variant: 'success', message: `Agendamento atualizado para ${order.code}` }),
       );
@@ -138,8 +140,11 @@ export function useConfirmSchedule() {
   const dispatch = useAppDispatch();
   const invalidate = useInvalidateSalesOrder();
   return useMutation({
-    mutationFn: (vars: { id: string; previousStatus: SalesOrderStatus }) =>
-      confirmSchedule(vars.id),
+    mutationFn: (vars: {
+      id: string;
+      previousStatus: SalesOrderStatus;
+      previousSchedule?: Schedule | null;
+    }) => confirmSchedule(vars.id),
     onSuccess: (order, vars) => {
       invalidate(order);
       dispatch(
@@ -152,7 +157,9 @@ export function useConfirmSchedule() {
           entity: 'SALES_ORDER',
           entityId: order.id,
           entityLabel: order.code,
-          previousState: statusChanged ? vars.previousStatus : 'Confirmação pendente',
+          previousState: statusChanged
+            ? vars.previousStatus
+            : formatSchedule(vars.previousSchedule ?? null),
           nextState: statusChanged ? order.status : formatSchedule(order.schedule),
         }),
       );

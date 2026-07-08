@@ -40,7 +40,12 @@ export function SchedulingModal({ open, onClose, order }: SchedulingModalProps) 
     if (!order) return;
     const currentOrder = order;
     updateSchedule.mutate(
-      { id: currentOrder.id, payload: values, previousSchedule: currentOrder.schedule },
+      {
+        id: currentOrder.id,
+        payload: values,
+        previousSchedule: currentOrder.schedule,
+        silent: confirm,
+      },
       {
         onSuccess: () => {
           if (!confirm) {
@@ -48,7 +53,11 @@ export function SchedulingModal({ open, onClose, order }: SchedulingModalProps) 
             return;
           }
           confirmSchedule.mutate(
-            { id: currentOrder.id, previousStatus: currentOrder.status },
+            {
+              id: currentOrder.id,
+              previousStatus: currentOrder.status,
+              previousSchedule: currentOrder.schedule,
+            },
             { onSuccess: onClose },
           );
         },
@@ -62,6 +71,7 @@ export function SchedulingModal({ open, onClose, order }: SchedulingModalProps) 
     <Modal
       open={open}
       onClose={onClose}
+      size="lg"
       title={isReschedule ? `Reagendar ${order.code}` : `Agendar ${order.code}`}
       description="Defina a data de entrega e a janela de atendimento."
       footer={
