@@ -1,4 +1,4 @@
-import type { SalesOrderFilters } from '@/features/sales-orders/api';
+import type { SalesOrderFilters } from '@/shared/types';
 
 /** Centralized query keys for predictable cache invalidation. */
 export const queryKeys = {

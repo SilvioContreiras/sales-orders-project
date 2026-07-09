@@ -29,3 +29,12 @@ export interface SalesOrder extends Timestamped {
   status: SalesOrderStatus;
   schedule: Schedule | null;
 }
+
+/** Query filters for listing sales orders (monitoring / API). */
+export interface SalesOrderFilters {
+  status?: SalesOrderStatus;
+  customerId?: string;
+  transportTypeId?: string;
+  dateFrom?: string;
+  dateTo?: string;
+}

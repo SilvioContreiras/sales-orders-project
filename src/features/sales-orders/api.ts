@@ -1,13 +1,12 @@
 import { apiClient } from '@/shared/api/client';
-import type { SalesOrder, SalesOrderStatus, ServiceWindow } from '@/shared/types';
+import type {
+  SalesOrder,
+  SalesOrderFilters,
+  SalesOrderStatus,
+  ServiceWindow,
+} from '@/shared/types';
 
-export interface SalesOrderFilters {
-  status?: SalesOrderStatus;
-  customerId?: string;
-  transportTypeId?: string;
-  dateFrom?: string;
-  dateTo?: string;
-}
+export type { SalesOrderFilters };
 
 export interface CreateSalesOrderPayload {
   customerId: string;

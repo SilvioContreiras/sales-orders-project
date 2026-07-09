@@ -18,6 +18,25 @@ export function ChangeTransportModal({
   customer,
   transportTypes,
 }: ChangeTransportModalProps) {
+  if (!open) return null;
+
+  return (
+    <ChangeTransportModalContent
+      key={order.id}
+      onClose={onClose}
+      order={order}
+      customer={customer}
+      transportTypes={transportTypes}
+    />
+  );
+}
+
+function ChangeTransportModalContent({
+  onClose,
+  order,
+  customer,
+  transportTypes,
+}: Omit<ChangeTransportModalProps, 'open'>) {
   const [transportTypeId, setTransportTypeId] = useState(order.transportTypeId);
   const updateTransport = useUpdateTransport();
 
@@ -40,7 +59,7 @@ export function ChangeTransportModal({
 
   return (
     <Modal
-      open={open}
+      open
       onClose={onClose}
       title="Alterar tipo de transporte"
       description="Apenas os tipos de transporte autorizados para o cliente são listados."

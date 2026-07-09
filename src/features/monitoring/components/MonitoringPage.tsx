@@ -16,11 +16,10 @@ import {
 } from '@/shared/components/ui';
 import { formatDate } from '@/shared/utils/format';
 import { getErrorMessage } from '@/shared/lib/errors';
-import type { SalesOrder, SalesOrderStatus } from '@/shared/types';
+import type { SalesOrder, SalesOrderFilters, SalesOrderStatus } from '@/shared/types';
 import { useCustomers } from '@/features/customers/queries';
 import { useTransportTypes } from '@/features/transport-types/queries';
 import { useSalesOrders } from '@/features/sales-orders/queries';
-import type { SalesOrderFilters } from '@/features/sales-orders/api';
 import { STATUS_LABELS, STATUS_SEQUENCE } from '@/features/sales-orders/domain/status';
 import { StatusBadge } from '@/features/sales-orders/components/StatusBadge';
 
