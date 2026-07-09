@@ -83,7 +83,7 @@ export function SalesOrderDetailPage() {
           {nextStatus === null ? (
             <span className="text-sm font-medium text-emerald-700">Esta ordem foi entregue.</span>
           ) : nextStatus === 'SCHEDULED' ? (
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <span className="text-sm text-slate-500">
                 Agende esta ordem para avançar no fluxo.
               </span>

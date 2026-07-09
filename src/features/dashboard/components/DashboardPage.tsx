@@ -60,7 +60,7 @@ export function DashboardPage() {
     <div>
       <PageHeader title="Painel" description="Visão operacional das ordens de venda." />
 
-      <div className="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-6">
+      <div className="mb-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-6">
         <Card className="p-4">
           <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
             Total de ordens

@@ -7,8 +7,6 @@ monitoramento operacional e trilha de auditoria.
 O backend é **simulado com MSW**, então a aplicação roda de ponta a ponta sem serviços externos.
 A fronteira REST é realista e pode ser trocada por uma API real alterando a configuração.
 
-> Código, pastas e identificadores em **inglês**; textos de interface e documentação em **português**.
-
 ---
 
 ## Stack tecnológica

@@ -172,8 +172,11 @@ export function CreateSalesOrderPage() {
 
           <div className="flex flex-col gap-3">
             {fields.map((fieldItem, index) => (
-              <div key={fieldItem.id} className="flex items-start gap-3">
-                <div className="flex-1">
+              <div
+                key={fieldItem.id}
+                className="flex flex-col gap-2 rounded-lg border border-slate-100 p-3 sm:flex-row sm:items-start sm:gap-3 sm:border-0 sm:p-0"
+              >
+                <div className="min-w-0 flex-1">
                   <Select
                     invalid={Boolean(errors.items?.[index]?.itemId)}
                     {...register(`items.${index}.itemId`)}
@@ -191,31 +194,33 @@ export function CreateSalesOrderPage() {
                     </p>
                   ) : null}
                 </div>
-                <div className="w-28">
-                  <Input
-                    type="number"
-                    min="1"
-                    step="1"
-                    invalid={Boolean(errors.items?.[index]?.quantity)}
-                    {...register(`items.${index}.quantity`, { valueAsNumber: true })}
-                  />
-                  {errors.items?.[index]?.quantity ? (
-                    <p className="mt-1 text-xs text-red-600">
-                      {errors.items[index]?.quantity?.message}
-                    </p>
-                  ) : null}
+                <div className="flex items-start gap-2">
+                  <div className="w-28 flex-1 sm:flex-none">
+                    <Input
+                      type="number"
+                      min="1"
+                      step="1"
+                      invalid={Boolean(errors.items?.[index]?.quantity)}
+                      {...register(`items.${index}.quantity`, { valueAsNumber: true })}
+                    />
+                    {errors.items?.[index]?.quantity ? (
+                      <p className="mt-1 text-xs text-red-600">
+                        {errors.items[index]?.quantity?.message}
+                      </p>
+                    ) : null}
+                  </div>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="mt-0.5"
+                    aria-label="Remover item"
+                    disabled={fields.length === 1}
+                    onClick={() => remove(index)}
+                  >
+                    <Trash2 className="size-4" />
+                  </Button>
                 </div>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="mt-1"
-                  aria-label="Remover item"
-                  disabled={fields.length === 1}
-                  onClick={() => remove(index)}
-                >
-                  <Trash2 className="size-4" />
-                </Button>
               </div>
             ))}
           </div>

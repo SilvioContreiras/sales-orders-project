@@ -23,15 +23,15 @@ const alignClass = {
 
 export function DataTable<T>({ columns, rows, rowKey, onRowClick }: DataTableProps<T>) {
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full border-collapse text-sm">
+    <div className="max-w-full overflow-x-auto overscroll-x-contain">
+      <table className="w-max min-w-full border-collapse text-sm">
         <thead>
           <tr className="border-b border-slate-200 bg-slate-50">
             {columns.map((column, index) => (
               <th
                 key={index}
                 className={cn(
-                  'px-4 py-3 text-xs font-semibold uppercase tracking-wider text-slate-500',
+                  'whitespace-nowrap px-3 py-3 text-xs font-semibold uppercase tracking-wider text-slate-500 sm:px-4',
                   alignClass[column.align ?? 'left'],
                   column.className,
                 )}
@@ -54,7 +54,11 @@ export function DataTable<T>({ columns, rows, rowKey, onRowClick }: DataTablePro
               {columns.map((column, index) => (
                 <td
                   key={index}
-                  className={cn('px-4 py-3 text-slate-700', alignClass[column.align ?? 'left'])}
+                  className={cn(
+                    'whitespace-nowrap px-3 py-3 text-slate-700 sm:px-4',
+                    alignClass[column.align ?? 'left'],
+                    column.className,
+                  )}
                 >
                   {column.cell(row)}
                 </td>
