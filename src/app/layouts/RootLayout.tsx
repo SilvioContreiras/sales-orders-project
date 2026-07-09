@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, Outlet } from '@tanstack/react-router';
 import { Menu, X } from 'lucide-react';
 import { navSections } from '@/app/router/navigation';
+import { Brand, BrandLogo } from '@/shared/components/BrandLogo';
 import { Toaster } from '@/shared/components/Toaster';
 import { cn } from '@/shared/lib/cn';
 
@@ -34,20 +35,6 @@ function Navigation({ onNavigate }: { onNavigate?: () => void }) {
         </div>
       ))}
     </nav>
-  );
-}
-
-function Brand() {
-  return (
-    <div className="flex items-center gap-2">
-      <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-brand-600 text-sm font-bold text-white">
-        OV
-      </span>
-      <div className="leading-tight">
-        <p className="text-sm font-semibold text-slate-900">OVGS</p>
-        <p className="text-xs text-slate-500">Ordens de Venda</p>
-      </div>
-    </div>
   );
 }
 
@@ -128,9 +115,14 @@ export function RootLayout() {
           >
             <Menu className="size-5" />
           </button>
-          <h1 className="min-w-0 truncate text-sm font-semibold text-slate-900 sm:text-base">
-            <span className="sm:hidden">OVGS</span>
-            <span className="hidden sm:inline">Sistema de Gestão de Ordens de Venda</span>
+          <div className="flex min-w-0 items-center gap-2.5 sm:hidden">
+            <BrandLogo className="size-7" />
+            <span className="truncate text-sm font-semibold tracking-wide text-slate-900">
+              OVGS
+            </span>
+          </div>
+          <h1 className="hidden min-w-0 truncate text-base font-semibold text-slate-900 sm:block">
+            Sistema de Gestão de Ordens de Venda
           </h1>
         </header>
 

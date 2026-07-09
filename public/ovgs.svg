@@ -1,0 +1,23 @@
+<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ovgs-mark" x1="8" y1="4" x2="34" y2="36" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3b82f6" />
+      <stop offset="1" stop-color="#1d4ed8" />
+    </linearGradient>
+  </defs>
+  <rect width="40" height="40" rx="10" fill="url(#ovgs-mark)" />
+  <path
+    d="M12 10.5h11.5a2 2 0 0 1 2 2V27a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V12.5a2 2 0 0 1 2-2Z"
+    fill="white"
+    fill-opacity="0.95"
+  />
+  <path d="M14.5 15.5h8M14.5 19h6.5M14.5 22.5h5" stroke="#1d4ed8" stroke-width="1.6" stroke-linecap="round" />
+  <circle cx="28.5" cy="27.5" r="6.5" fill="#1e3a8a" />
+  <path
+    d="M25.8 27.5h4.2m0 0-1.7-1.7m1.7 1.7-1.7 1.7"
+    stroke="white"
+    stroke-width="1.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
