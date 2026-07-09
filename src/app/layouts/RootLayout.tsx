@@ -3,6 +3,7 @@ import { Link, Outlet } from '@tanstack/react-router';
 import { Menu, X } from 'lucide-react';
 import { navSections } from '@/app/router/navigation';
 import { Toaster } from '@/shared/components/Toaster';
+import { cn } from '@/shared/lib/cn';
 
 function Navigation({ onNavigate }: { onNavigate?: () => void }) {
   return (
@@ -77,34 +78,44 @@ export function RootLayout() {
         <Navigation />
       </aside>
 
-      {mobileNavOpen ? (
-        <div className="fixed inset-0 z-40 md:hidden">
-          <div
-            className="absolute inset-0 bg-slate-900/40"
-            aria-hidden="true"
-            onClick={closeMobileNav}
-          />
-          <aside
-            className="absolute inset-y-0 left-0 flex w-[min(18rem,85vw)] flex-col bg-white shadow-xl"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Menu de navegação"
-          >
-            <div className="flex h-14 items-center justify-between border-b border-slate-200 px-4">
-              <Brand />
-              <button
-                type="button"
-                aria-label="Fechar menu"
-                onClick={closeMobileNav}
-                className="inline-flex size-9 cursor-pointer items-center justify-center rounded-lg text-slate-600 transition hover:bg-slate-100"
-              >
-                <X className="size-5" />
-              </button>
-            </div>
-            <Navigation onNavigate={closeMobileNav} />
-          </aside>
-        </div>
-      ) : null}
+      <div
+        className={cn(
+          'fixed inset-0 z-40 md:hidden',
+          mobileNavOpen ? 'pointer-events-auto' : 'pointer-events-none',
+        )}
+        aria-hidden={!mobileNavOpen}
+        inert={!mobileNavOpen ? true : undefined}
+      >
+        <div
+          className={cn(
+            'absolute inset-0 bg-slate-900/40 transition-opacity duration-300 ease-out',
+            mobileNavOpen ? 'opacity-100' : 'opacity-0',
+          )}
+          onClick={closeMobileNav}
+        />
+        <aside
+          className={cn(
+            'absolute inset-y-0 left-0 flex w-[min(18rem,85vw)] flex-col bg-white shadow-xl transition-transform duration-300 ease-out',
+            mobileNavOpen ? 'translate-x-0' : '-translate-x-full',
+          )}
+          role="dialog"
+          aria-modal={mobileNavOpen}
+          aria-label="Menu de navegação"
+        >
+          <div className="flex h-14 items-center justify-between border-b border-slate-200 px-4">
+            <Brand />
+            <button
+              type="button"
+              aria-label="Fechar menu"
+              onClick={closeMobileNav}
+              className="inline-flex size-9 cursor-pointer items-center justify-center rounded-lg text-slate-600 transition hover:bg-slate-100"
+            >
+              <X className="size-5" />
+            </button>
+          </div>
+          <Navigation onNavigate={closeMobileNav} />
+        </aside>
+      </div>
 
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="flex h-14 items-center gap-3 border-b border-slate-200 bg-white px-4 sm:h-16 sm:px-6">
