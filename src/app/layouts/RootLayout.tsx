@@ -49,9 +49,6 @@ export function RootLayout() {
           <h1 className="text-base font-semibold text-slate-900">
             Sistema de Gestão de Ordens de Venda
           </h1>
-          <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-500">
-            API Simulada
-          </span>
         </header>
 
         <main className="flex-1 overflow-y-auto p-6">
