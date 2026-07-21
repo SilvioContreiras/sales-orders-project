@@ -11,19 +11,19 @@ The REST boundary is realistic and can be swapped for a real API by changing the
 
 ## Tech stack
 
-| Area               | Choice                                        |
-| ------------------ | --------------------------------------------- |
-| UI                 | React 19 + Tailwind CSS v4                    |
-| Build              | Vite + TypeScript                             |
-| Routing            | TanStack Router                               |
-| Server state       | TanStack Query                                |
-| Global state       | Redux Toolkit + Redux Saga                    |
-| Forms              | React Hook Form + Zod                         |
-| HTTP / mocks       | Axios + MSW                                   |
-| Testing            | Vitest + React Testing Library                |
-| Quality            | ESLint, Prettier, Husky, lint-staged          |
-| Delivery           | Docker (multi-stage) + Docker Compose + nginx |
-| CI/CD              | GitHub Actions → GHCR                         |
+| Area         | Choice                                        |
+| ------------ | --------------------------------------------- |
+| UI           | React 19 + Tailwind CSS v4                    |
+| Build        | Vite + TypeScript                             |
+| Routing      | TanStack Router                               |
+| Server state | TanStack Query                                |
+| Global state | Redux Toolkit + Redux Saga                    |
+| Forms        | React Hook Form + Zod                         |
+| HTTP / mocks | Axios + MSW                                   |
+| Testing      | Vitest + React Testing Library                |
+| Quality      | ESLint, Prettier, Husky, lint-staged          |
+| Delivery     | Docker (multi-stage) + Docker Compose + nginx |
+| CI/CD        | GitHub Actions → GHCR                         |
 
 CI builds and tests on push/PR to `main`; CD publishes the Docker image to GHCR. See [`.github/workflows/`](.github/workflows/).
 
